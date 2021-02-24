@@ -21,6 +21,7 @@ public class ImageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         spinner = (Spinner) findViewById(R.id.spinner);
+        qbImage = (ImageView) findViewById(R.id.qbImage);
 
         ArrayList<String> nameArray = new ArrayList<String>();
         nameArray.add(getString(R.string.brady));
@@ -32,19 +33,23 @@ public class ImageActivity extends AppCompatActivity {
        int[] qbImageArray = new int[]{R.drawable.brady, R.drawable.brees, R.drawable.mahomes,
                                         R.drawable.rodgers, R.drawable.watson};
 
-       QuarterbackAdapter adapter = new QuarterbackAdapter(this, nameArray);
+       QuarterbackAdapter adapter = new QuarterbackAdapter(this, nameArray, qbImageArray);
 
        spinner.setAdapter(adapter);
 
-        /*
-        spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                qbImage.setImageResource(qbImageArray[position]);
             }
-        });
-        */
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                qbImage.setVisibility(View.GONE);
+            }
+
+        });
 
     }
 }
