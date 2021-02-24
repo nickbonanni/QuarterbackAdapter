@@ -1,6 +1,7 @@
 package edu.temple.assignment3;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -39,7 +40,25 @@ public class QuarterbackAdapter extends BaseAdapter {
 
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
-        return getView(position, convertView, parent);
+
+        LinearLayout ddView = (LinearLayout) getView(position, convertView, parent);
+        ddView.setGravity(Gravity.NO_GRAVITY);
+
+        // Initializing image
+        ImageView qbImageView = new ImageView(context);
+        qbImageView.setImageResource(images[position]);
+
+        // Fixing size
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(250, 250);
+        qbImageView.setLayoutParams(params);
+
+        // Changing Text Padding
+        TextView qbTextView = (TextView) ddView.getChildAt(0);
+        qbTextView.setPadding(30,90,0,0);
+
+        ddView.addView(qbImageView, 0);
+
+        return ddView;
     }
 
     @Override
@@ -49,27 +68,17 @@ public class QuarterbackAdapter extends BaseAdapter {
         LinearLayout linearLayout = new LinearLayout(context);
         linearLayout.setOrientation(LinearLayout.HORIZONTAL);
         linearLayout.setPadding(10,10,10,10);
+        linearLayout.setGravity(Gravity.CENTER);
 
         // Initializing text view
         TextView qbTextView = new TextView(context);
         qbTextView.setTextSize(22);
         qbTextView.setText(names.get(position));
 
-        // Initializing image
-        ImageView qbImageView = new ImageView(context);
-        qbImageView.setImageResource(images[position]);
-
-        // Fixing padding
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(250, 250);
-        qbImageView.setLayoutParams(params);
-        qbTextView.setPadding(25,90,0,0);
-
-        // Add text and image
-        linearLayout.addView(qbImageView);
         linearLayout.addView(qbTextView);
 
         return linearLayout;
+
     }
 
 }
-

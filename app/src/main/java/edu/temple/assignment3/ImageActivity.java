@@ -17,6 +17,7 @@ public class ImageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -24,14 +25,15 @@ public class ImageActivity extends AppCompatActivity {
         qbImage = (ImageView) findViewById(R.id.qbImage);
 
         ArrayList<String> nameArray = new ArrayList<String>();
+        nameArray.add(getString(R.string.instructions));
         nameArray.add(getString(R.string.brady));
         nameArray.add(getString(R.string.brees));
         nameArray.add(getString(R.string.mahomes));
         nameArray.add(getString(R.string.rodgers));
         nameArray.add(getString(R.string.watson));
 
-       int[] qbImageArray = new int[]{R.drawable.brady, R.drawable.brees, R.drawable.mahomes,
-                                        R.drawable.rodgers, R.drawable.watson};
+       int[] qbImageArray = new int[]{R.drawable.transparent_square, R.drawable.brady, R.drawable.brees,
+               R.drawable.mahomes, R.drawable.rodgers, R.drawable.watson};
 
        QuarterbackAdapter adapter = new QuarterbackAdapter(this, nameArray, qbImageArray);
 
@@ -46,7 +48,7 @@ public class ImageActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                qbImage.setVisibility(View.GONE);
+                // Do nothing. This should never happen.
             }
 
         });
